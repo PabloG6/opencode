@@ -1,0 +1,19 @@
+# Triage by Chodeberg: how to install and launch this release in a reproduction sandbox.
+version: 1
+source: release
+mode: desktop
+tags: "v*"
+release:
+  install: npm install --prefix /work/src/app "opencode-ai@{version}"
+  version_from_tag: "^v(.+)$"
+build:
+  image: ubuntu-26.04
+launch:
+  - command: /work/src/app/node_modules/opencode-linux-x64/bin/opencode
+    terminal: ["120x36"]
+detect_version:
+  command: /work/src/app/node_modules/opencode-linux-x64/bin/opencode --version
+  pattern: "(\\d+\\.\\d+\\.\\d+)"
+network:
+  build: [registry.npmjs.org]
+  sessions: none
